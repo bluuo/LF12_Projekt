@@ -1,44 +1,40 @@
 import requests
 
-def sendRequest(location):
-    query = '[out:json];area["admin_level"="8"]["name"='+location+'];out body;node["highway"="speed_camera"](area);out body;>;out skel qt;'
-    return str(query)
-
-def send_request(location):
+def request(query):
     overpass_url = "http://overpass-api.de/api/interpreter"
-    
-    # Your Overpass Query
-    query = f'[out:json];area["admin_level"="8"]["name"="{location}"];out body;node["highway"="speed_camera"](area);out body;>;out skel qt;'
-
-    # Set up the request headers and parameters
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    }
     params = {
-        'data': query
+        "data": query,
     }
 
-     # Make the request
-    response = requests.post(overpass_url, headers=headers, params=params)
+    response = requests.get(overpass_url, params=params)
 
-    # Check if the request was successful (status code 200)
     if response.status_code == 200:
-        # Print the response content (JSON data)
-        print(response.json())
+        return response.json()
     else:
         print(f"Error: {response.status_code}")
+        return None
 
 def main():
-    location = "berlin"
-    ##request = sendRequest(location)
+    location = "Berlin"
+    overpass_query_template = f"""
+    [out:json];
+    area
+        ["admin_level"="8"]
+        ["name"="{location}"];
+    out body;
 
-    ##print("Request Test")
-    ##print("Start of the Query: \n" + request + "\nEnd of query")
-    send_request(location)
+    node["highway"="speed_camera"](area);
+    out body;
+    >;
+    out skel qt;
+    """
 
+    result = request(overpass_query_template)
 
+    if result:
+        # Process the result as needed
+        for element in result.get("elements", []):
+            print(element)
 
 if __name__ == "__main__":
     main()
-
-
