@@ -5,9 +5,7 @@ import tkinter
 import tkintermapview
 
 class frontend:
-    def __init__(self):
-        print("object created")
-        
+    @staticmethod        
     def loadUi(self):
         customtkinter.set_appearance_mode("light")
         customtkinter.set_default_color_theme("dark-blue")

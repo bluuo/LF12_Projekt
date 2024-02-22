@@ -1,6 +1,9 @@
+from frontend import frontend
 
 def main():
-    print("This is the main function. The program starts here.")
+    print("program start")
+    frontendObject = frontend()
+    frontendObject.loadUi()
 
 
 if __name__ == "__main__":
