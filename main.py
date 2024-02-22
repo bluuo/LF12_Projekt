@@ -1,4 +1,4 @@
-from Frontend import frontend
+from frontend import frontend
 
 def main():
     print("program start")
