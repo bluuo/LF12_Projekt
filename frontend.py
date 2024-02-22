@@ -6,14 +6,14 @@ import tkintermapview
 
 class frontend:
     @staticmethod        
-    def loadUi(self):
+    def loadUi():
         customtkinter.set_appearance_mode("light")
         customtkinter.set_default_color_theme("dark-blue")
 
         root = customtkinter.CTk()
         root.title("Blitzer Tracker")
         root.resizable(True, True)  # Allow window resizing
-        root.geometry("+20+20")  # Add 20 pixels of padding to the top and left sides
+        # root.geometry("+20+20+20+20")  # Add 20 pixels of padding to the top and left sides
 
 # Configure grid weights
         # root.grid_rowconfigure(0, weight=1)
@@ -30,7 +30,6 @@ class frontend:
         location_frame.grid(row=1, column=0, padx=10, pady=10, sticky='nwse')
         # location_frame.grid_propagate(False)  # Prevent frame from resizing
         
-        
         location_label = customtkinter.CTkLabel(location_frame, text="Ort", font=("Helvetica", 16), height=20)
         location_label.grid(row=0, column=0, padx=10, pady=10, sticky='nwse')
 
@@ -46,7 +45,7 @@ class frontend:
         plz_entry = customtkinter.CTkEntry(plz_frame)
         plz_entry.grid(row=1, column=0, padx=10, pady=10, sticky='nwse')
 
-        button = customtkinter.CTkButton(root, text="Start", command=self.on_submit)
+        button = customtkinter.CTkButton(root, text="Start", command=frontend.on_submit)
         button.grid(row=3, column=0, padx=10, pady=10, sticky='nwse')
         
 
@@ -58,6 +57,6 @@ class frontend:
 
         root.mainloop()
 
-        
-    def on_submit(self):
+    @staticmethod
+    def on_submit():
         print("test")
