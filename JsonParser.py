@@ -7,9 +7,9 @@ class JsonParser:
         for element in self.json_data["elements"]:
             if element["type"] == "node":
                 parsed_element = {
-                    "lat": element,
-                    "lon": element,
-                    "maxspeed": element["tags"]
+                    "lat": element["lat"],
+                    "lon": element["lon"],
+                    "maxspeed": element["tags"].get("maxspeed", None)
                 }
                 parsed_data.append(parsed_element)
         return parsed_data

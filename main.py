@@ -9,8 +9,13 @@ def main():
         location_value, plz_value = getEntryValues()
         response = requestSpeedCameras(location_value)
         parser = JsonParser(response)
-        elements = parser.parse()
-        elementCount =  len(elements)
+        speedCameras = parser.parse()
+        
+        for speedCamera in speedCameras:
+            map_widget.set_marker(speedCamera.get('lat'), speedCamera.get('lon'))
+        map_widget.set_position(50.09677226088053, 8.645226816465373)  
+        
+        elementCount =  len(speedCameras)
         clearTextbox()
         insertTextbox(elementCount)
     
