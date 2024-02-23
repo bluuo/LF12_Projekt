@@ -5,8 +5,13 @@ import tkinter
 import tkintermapview
 
 
-class frontend:
-    @staticmethod
+class Frontend:
+
+    global location_entry
+    global plz_entry
+    global location_input
+    global plz_input
+
     def loadUi():
         customtkinter.set_appearance_mode("light")
         customtkinter.set_default_color_theme("dark-blue")
@@ -62,7 +67,7 @@ class frontend:
             main_frame, text="")
 
         button = customtkinter.CTkButton(
-            main_frame, text="Start", command=frontend.on_submit)
+            main_frame, text="Start", command=frontend.onSubmit)
         button.grid(row=4, column=0, padx=padding, pady=padding, sticky='nwse')
 
         textbox = customtkinter.CTkTextbox(main_frame)
@@ -84,6 +89,13 @@ class frontend:
 
         root.mainloop()
 
-    @staticmethod
-    def on_submit():
-        print("test")
+    def onSubmit():
+        location_input = location_entry.get()
+        plz_input = plz_entry.get()
+       
+       
+    def getEntryValues():
+        return location_input, plz_input
+    
+        
+
