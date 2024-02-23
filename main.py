@@ -1,11 +1,7 @@
 # from Frontend import Frontend
 from RequestHandler import requestSpeedCameras
 from JsonParser import JsonParser
-import json
 import customtkinter
-import os
-from tkinter.filedialog import askdirectory
-import tkinter
 import tkintermapview
 
 def main():
