@@ -1,4 +1,3 @@
-# from Frontend import Frontend
 from RequestHandler import requestSpeedCameras
 from JsonParser import JsonParser
 import customtkinter
@@ -11,17 +10,18 @@ def main():
         response = requestSpeedCameras(location_value)
         parser = JsonParser(response)
         elements = parser.extract_elements()
-        
         elementCount =  len(elements)
-        
-        setTextbox(elementCount)
-
+        clearTextbox()
+        insertTextbox(elementCount)
     
     def getEntryValues():
         return location_entry.get(), plz_entry.get()
     
-    def setTextbox(outputString):
-        textbox.insert("0.0", outputString)
+    def insertTextbox(outputString):
+        textbox.insert("0.0", str(outputString) + "\n")
+        
+    def clearTextbox():
+        textbox.delete('1.0', "end")
 
     customtkinter.set_appearance_mode("light")
     customtkinter.set_default_color_theme("dark-blue")

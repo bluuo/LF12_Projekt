@@ -4,12 +4,8 @@ def requestSpeedCameras(location):
     overpass_url = "http://overpass-api.de/api/interpreter"
     query = f"""
     [out:json];
-    area
-        ["admin_level"="8"]
-        ["name"="{location}"];
-    out body;
-
-    node["highway"="speed_camera"](area);
+    area[name="{location}"]->.searchArea;
+    node["highway"="speed_camera"](area.searchArea);
     out body;
     >;
     out skel qt;
