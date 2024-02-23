@@ -67,7 +67,7 @@ class Frontend:
             main_frame, text="")
 
         button = customtkinter.CTkButton(
-            main_frame, text="Start", command=frontend.onSubmit)
+            main_frame, text="Start", command=Frontend.onSubmit)
         button.grid(row=4, column=0, padx=padding, pady=padding, sticky='nwse')
 
         textbox = customtkinter.CTkTextbox(main_frame)
