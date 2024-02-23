@@ -9,7 +9,7 @@ def main():
         location_value, plz_value = getEntryValues()
         response = requestSpeedCameras(location_value)
         parser = JsonParser(response)
-        elements = parser.extract_elements()
+        elements = parser.parse()
         elementCount =  len(elements)
         clearTextbox()
         insertTextbox(elementCount)
@@ -58,6 +58,7 @@ def main():
     location_entry = customtkinter.CTkEntry(location_frame)
     location_entry.grid(row=1, column=0, padx=padding,
                         pady=padding, sticky='nwse')
+    location_entry.bind('<Return>', lambda event: onSubmit())
 
     plz_frame = customtkinter.CTkFrame(main_frame)
     plz_frame.grid(row=2, column=0, padx=padding,
