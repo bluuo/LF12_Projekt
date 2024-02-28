@@ -4,11 +4,13 @@ import tkinter
 from RequestHandler import requestSpeedCameras
 from JsonParser import JsonParser
 import customtkinter
-from CTkScrollableDropdown import *
+# from CTkScrollableDropdown import *
 import tkintermapview
 from ttkwidgets.autocomplete import AutocompleteEntry
 import csv
 
+
+city_list = None
 
 def main():
 
@@ -63,21 +65,24 @@ def main():
         csv_data = load_csv_column_into_list(csv_file, column_name)
         return csv_data
     
-    def onKeyPress(event):
-        typing_timer = None
-        if typing_timer is not None:
-            root.after_cancel(typing_timer)
-        typing_timer = root.after(500, doAutocomplete, event)
+    # def onKeyPress(event):
+    #     typing_timer = None
+    #     if typing_timer is not None:
+    #         root.after_cancel(typing_timer)
+    #     typing_timer = root.after(2000, doAutocomplete, event)
 
-    def doAutocomplete(event):
-        typed_text = event.widget.get()
-        matching_options = [option for option in autocomplete_options if option.startswith(typed_text)]
-        if matching_options:
-            event.widget.delete(0, customtkinter.END)
-            event.widget.insert(0, matching_options[0])
-            event.widget.select_range(len(typed_text), customtkinter.END)
-        
-
+    # def doAutocomplete(event):
+    #     typed_text = event.widget.get()
+    #     matching_options = [option for option in city_list if option.startswith(typed_text)]
+    #     if matching_options:
+    #         event.widget.delete(0, customtkinter.END)
+    #         event.widget.insert(0, matching_options[0])
+    #         event.widget.select_range(len(typed_text), customtkinter.END)
+            
+    global city_list   
+    if city_list == None:
+        city_list = getCityList()
+    
     customtkinter.set_appearance_mode("dark")
     customtkinter.set_default_color_theme("dark-blue")
 
@@ -109,14 +114,14 @@ def main():
                         pady=padding, sticky='nwse')
 # Define a list of options for autocomplete
     # Add your autocomplete options here
-    autocomplete_options = getCityList()
+    
 
     location_entry = customtkinter.CTkEntry(location_frame, width=200)
     location_entry.grid(row=1, column=0, padx=10, pady=10, sticky='nwse')
-    location_entry.bind('<KeyPress>', onKeyPress)
+    # location_entry.bind('<KeyPress>', onKeyPress)
     location_entry.bind('<Return>', lambda event: onSubmit())
 
-    location_entry = CTkScrollableDropdown(location_frame, width=200)
+    # location_entry = CTkScrollableDropdown(location_frame, width=200)
     location_entry.grid()
     location_entry.bind('<Return>', lambda event: onSubmit())
 
