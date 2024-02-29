@@ -1,10 +1,7 @@
 import json
-import time
-import tkinter
 from RequestHandler import requestSpeedCameras
 from JsonParser import JsonParser
 import customtkinter
-# from CTkScrollableDropdown import *
 import tkintermapview
 from ttkwidgets.autocomplete import AutocompleteEntry
 import csv
@@ -15,11 +12,13 @@ city_list = None
 def main():
 
     def onSubmit():
+        clearMarker()
         location_value = getEntryValues()
         response = requestSpeedCameras(location_value)
         json_formatted_str = json.dumps(response, indent=2)
         parser = JsonParser(response)
         speedCameras = parser.parse()
+        
         sumLat = 0
         sumLon = 0
         for speedCamera in speedCameras:
@@ -65,6 +64,9 @@ def main():
         csv_data = load_csv_column_into_list(csv_file, column_name)
         return csv_data
     
+    def clearMarker():
+        map_widget.delete_all_marker()
+        
     # def onKeyPress(event):
     #     typing_timer = None
     #     if typing_timer is not None:
@@ -165,7 +167,7 @@ def main():
                     pady=padding, sticky='nwse')
     # set current widget position and zoom
     map_widget.set_position(
-        50.09677226088053, 8.645226816465373)  # Paris, France
+        50.09677226088053, 8.645226816465373) 
 
     main_frame.grid_rowconfigure(3, weight=1)
     # main_frame.grid_columnconfigure(0, weight=1)
